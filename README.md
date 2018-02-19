@@ -36,6 +36,7 @@ CREATE TABLE cf_features (
     x_list     text    NOT NULL,
     x_features text    NOT NULL
 );
+CREATE INDEX index_cf_features_on_key ON cf_features (key);
 
 Finish creation of cf_features table!
 ```
