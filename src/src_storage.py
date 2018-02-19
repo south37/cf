@@ -16,9 +16,9 @@ class SrcStorage:
         v_dict = {}
         for i, row in enumerate(rows):
             # NOTE(south37): prev is y, next is x.
-            y = int(row[0])
-            x = int(row[1])
-            v = int(row[2])
+            y = row[0]
+            x = row[1]
+            v = float(row[2])
 
             y_set.add(y)
             x_set.add(x)
