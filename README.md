@@ -1,5 +1,5 @@
 ## cf
-command line tool for using collaborative filtering.
+Command line tool for using collaborative filtering.
 By specifing the table name, "Train" and "predict" of collaborative filtering can be done.
 
 ## Setup
@@ -57,9 +57,12 @@ $ bin/predict --src user_company_applications --cmd get_similar_y_list --args '{
 
 ## bin/train
 Perform training.
+
 Input is a table which has three columns "column corresponding to `x`", "column corresponding to `y`", and "column corresponding to `v`", and the input table name is specified as the` src` parameter.
 Note that `v` can be omitted, in which case `score` treats `1.0` for all `x`, `y` combinations.
+
 The result is output to the `cf_features` table. The output is contained in one record, the value contained in `x`, `y` of `src` is outputted to the `x_list`, `y_list` column as csv. The `feature vector` corresponding to the element is output to` x_features`, `y_features` as csv.
+
 By passing `n` as an option, you can specify the dimension of the feature vector. The default is `10`.
 
 ```
@@ -90,13 +93,15 @@ Finish saving the features!
 
 ## bin/predict
 Perform predict.
-As `src`, specify the table name passed in the train and pass the operation you want to do to `cmd`.
-following are supported as operations.
 
-- `get_y_feature`: Return the feature vector of `y`
-- `get_x_feature`: Return the feature vector of `x`
-- `get_similar_y_list`: Return a list of `y` with a score (the smaller the better) similar to passed `y`
-- `get_similar_x_list`: Return a list of `x with a score (the smaller the better) similar to passed `x`.
+As `src`, specify the table name passed in when training and pass the operation you want to do to `cmd`. Specify the parameter in JSON format to `args`, but note that `args` does not allow spaces in it.
+
+Following are supported as operations.
+
+- `get_y_feature`: Return the feature vector of `y` (parameter: `{"y":y}`).
+- `get_x_feature`: Return the feature vector of `x` (parameter: `{"x":x}`).
+- `get_similar_y_list`: Return a list of `y` with a score (the smaller the better) similar to passed `y` (parameter: `{"y":y}`).
+- `get_similar_x_list`: Return a list of `x` with a score (the smaller the better) similar to passed `x` (parameter: `{"x":x}`).
 
 ```
 $ bin/predict --src user_company_applications --cmd get_similar_y_list --args '{"y":"1"}'
